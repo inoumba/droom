@@ -1,0 +1,17 @@
+/*
+The following function does the geocoding (Human addresses into GPS cordinates).
+It takes the as argument a geocoder object, a google map, and a Human address.
+It return the location(latitude and longitude) as a LatLng object
+*/
+function geocodeDroom(geocoder, map, address) {
+  geocoder.geocode({'address': address}, function(results, status) {
+    if (status === google.maps.GeocoderStatus.OK) { 
+      console.log(results[0].geometry.location.toString());
+      return results[0].geometry.location;
+    } else { 
+      alert('Geocode was not successful for the following reason: ' + status);
+      // console.log("0,0");
+      return {lat: 0, lng: 0};
+      }
+  }); 
+}
