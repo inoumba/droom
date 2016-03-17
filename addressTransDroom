@@ -15,3 +15,26 @@ function geocodeDroom(geocoder, map, address) {
       }
   }); 
 }
+
+/*
+The following function does the Reverse geocoding (GPS cordinates into Human addresses).
+It takes the as argument a geocoder object, a google map, and a GPS coordinates in form of object latlng.
+It return the Human readable address as a string.
+*/
+
+function geocodeLatLngDroom(geocoder, map, latlng) {
+  geocoder.geocode({'location': latlng}, function(results, status) {
+          if (status === google.maps.GeocoderStatus.OK) {
+            if (results[1]) {
+              //console.log(results[1].formatted_address);
+              return results[1].formatted_address;
+            } else {
+                var noResults = "No Results found";
+                return noResults;
+            }
+          } else {
+              //console.log(status);
+              return status;
+          }
+        });
+}
