@@ -1,1 +1,25 @@
 // this is the module describing functions for the drone motion
+
+
+/*
+The following function calculate the time it take for a Drone to travel from point A to point B.
+It takes in GPS coordinates of point A and B in form of Google latlng object; the speed of the drone(miles per Hour) is also provided as argument as argument.
+It return in Hours the time it takes for the drone to reach the destination B.
+*/
+
+function distanceDroom(latlngA, latlngB, droneSpeed){
+  var R = 3959; //Earth radius in miles
+  var lataR = latlngA[lat].toRadians();
+  var latbR = latlngB[lat].toRadians();
+  var diffLat = (latlngB[lat] - latlngA[lat]).toRadians();
+  var diffLng = (latlngB[lng] - latlngA[lng]).toRadians();
+  
+  var a = Math.sin(diffLat/2) * Math.sin(diffLat/2) +
+        Math.cos(lataR) * Math.cos(latbR) *
+        Math.sin(diffLng/2) * Math.sin(diffLng/2);
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  var d = R * c;
+  
+  var timeToB = d/droneSpeed;
+  return timeToB; //in Hours
+}
